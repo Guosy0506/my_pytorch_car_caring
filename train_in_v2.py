@@ -76,7 +76,6 @@ class Env():
         assert len(self.stack) == args.img_stack
         return np.array(self.stack), total_reward, die, truncated
 
-
     @staticmethod
     def rgb2gray(rgb, norm=True):
         # rgb image -> gray [0, 1]
@@ -204,7 +203,6 @@ class Agent():
 
         for _ in range(self.ppo_epoch):
             for index in BatchSampler(SubsetRandomSampler(range(self.buffer_capacity)), self.batch_size, False):
-
                 alpha, beta = self.net(s[index])[0]
                 dist = Beta(alpha, beta)
                 a_logp = dist.log_prob(a[index]).sum(dim=1, keepdim=True)
